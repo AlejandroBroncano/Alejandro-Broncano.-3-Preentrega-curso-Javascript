@@ -51,3 +51,23 @@ let precioSesion = 35;
 let costoTotal = calcular(sesiones, precioSesion);
 
 alert("El costo total de tus" + " " + sesiones + " sesiones es de €" + costoTotal + ".");
+
+// Creamos una función de orden superior para mostrar los detalles del masaje
+function mostrarDetallesMasaje(masajeDeportivo) {
+    alert("Detalles del masaje: es una técnica terapéutica que combina movimientos profundos y estiramientos para mejorar el rendimiento y la recuperación de los atletas. Alivia la tensión muscular, promueve la circulación y previene lesiones, optimizando el cuerpo para un óptimo desempeño deportivo.");
+    alert("Nombre: " + masajeDeportivo.nombre);
+    alert("Duración: " + masajeDeportivo.duracion + " minutos");
+    alert("Terapeuta: " + masajeDeportivo.terapeuta);
+    alert("Precio: " + masajeDeportivo.precio);
+}
+
+// Creamos un objeto con información del masaje deportivo
+let masajeDeportivo = {
+    nombre: "Masaje deportivo",
+    duracion: "60 minutos",
+    terapeuta: "Blanca",
+    precio: "35€"
+};
+
+// Llamamos a la función para mostrar los detalles del masaje
+mostrarDetallesMasaje(masajeDeportivo);

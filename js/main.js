@@ -1,47 +1,88 @@
-// Almacenamos el nombre del cliente y como nos ha conocido
+// Almacenamos el nombre del cliente y cómo nos ha conocido
 let nombreCliente = prompt("Como te llamas?");
 let como = prompt("Como nos has conocido?");
+alert("Bienvenido " + nombreCliente + ". Esperamos que encuentres el tratamiento que más se acerque a ti.");
 
-alert("Bienvenido" + " " + nombreCliente + " esperamos que encuentres el tratamiento que mas se acerque a tí.");
+// Creamos objetos para representar los diferentes tipos de masajes
+let masajes = [
+    {
+        nombre: "Deportivo",
+        duracion: "60 minutos",
+        terapeuta: "Blanca",
+        precio: "35€"
+    },
+    {
+        nombre: "Relajante",
+        duracion: "45 minutos",
+        terapeuta: "Carlos",
+        precio: "30€"
+    },
+    {
+        nombre: "Maderoterapia",
+        duracion: "75 minutos",
+        terapeuta: "María",
+        precio: "40€"
+    },
+    {
+        nombre: "Reflexología",
+        duracion: "60 minutos",
+        terapeuta: "Laura",
+        precio: "35€"
+    },
+    {
+        nombre: "Shiatsu",
+        duracion: "90 minutos",
+        terapeuta: "Pedro",
+        precio: "50€"
+    }
+];
 
-//Mostraremos los diferentes tratamientos
-let tratamientos = ["deportivo", "relajante", "maderoterapia", "reflexología", "shiatsu"];
+// Mostramos los diferentes tipos de masajes uno a uno
+masajes.forEach(function (masaje, index) {
+    let mensaje = `Tratamiento ${index + 1}: ${masaje.nombre}\nDuración: ${masaje.duracion}\nTerapeuta: ${masaje.terapeuta}\nPrecio: ${masaje.precio}`;
+    alert(mensaje);
+});
 
-alert("Estos son los tratamientos que podemos ofrecer:");
-for (let i = 0; i < tratamientos.length; i++) {
-    alert("Tratamiento " + (i + 1) + ": " + tratamientos[i]);
+// Solicitamos al usuario la duración mínima de los masajes que desea ver
+let duracionMinima = prompt("Ingresa la duración mínima en minutos de los masajes que deseas ver:");
+
+// Filtramos los masajes cuya duración sea igual o superior a la duración mínima ingresada
+let masajesFiltrados = masajes.filter(function (masaje) {
+    let duracionNumerica = parseInt(masaje.duracion);
+    return duracionNumerica >= duracionMinima;
+});
+
+// Mostramos los masajes filtrados
+if (masajesFiltrados.length > 0) {
+    alert(`Estos son los masajes con duración igual o superior a ${duracionMinima} minutos:`);
+    masajesFiltrados.forEach(function (masaje) {
+        let mensaje = `Nombre: ${masaje.nombre}\nDuración: ${masaje.duracion}\nTerapeuta: ${masaje.terapeuta}\nPrecio: ${masaje.precio}`;
+        alert(mensaje);
+    });
+} else {
+    alert(`No hay masajes con duración igual o superior a ${duracionMinima} minutos.`);
 }
 
-//Daremos a elegir entre nuestros diferentes tratamientos
+// Pedimos al usuario que elija un tratamiento
 let tipoMasaje;
 
 while (true) {
-    tipoMasaje = prompt("¿Cuál de los anteriores es de tu interés?: deportivo, relajante, maderoterapia, reflexología o shiatsu");
+    tipoMasaje = prompt(`Elige el número correspondiente al tratamiento que deseas:\n\n1 - Deportivo\n2 - Relajante\n3 - Maderoterapia\n4 - Reflexología\n5 - Shiatsu`);
 
-    if (tipoMasaje === "deportivo") {
-        alert("Necesitas descongestionar? Estás en buenas manos...");
-        break; // Sale del bucle while
-    } else if (tipoMasaje === "relajante") {
-        alert("¡Cierra los ojos y disfruta, has venido para eso!");
-        break; // Sale del bucle while
-    } else if (tipoMasaje === "maderoterapia") {
-        alert("¡Ve diciendo adiós a la celulitis!");
-        break; // Sale del bucle while
-    } else if (tipoMasaje === "reflexología") {
-        alert("¡Uno de los placeres de la vida... reflexología PODAL!");
-        break; // Sale del bucle while
-    } else if (tipoMasaje === "shiatsu") {
-        alert("¡Déjate seducir por uno de los masajes más antiguos del mundo!");
+    tipoMasaje = parseInt(tipoMasaje); // Convertimos la opción ingresada a un número entero
+
+    if (tipoMasaje >= 1 && tipoMasaje <= masajes.length) {
+        let masajeElegido = masajes[tipoMasaje - 1];
+        alert(`Has elegido el tratamiento de ${masajeElegido.nombre}. Disfruta de tu masaje.`);
         break; // Sale del bucle while
     } else {
-        alert("Parece que no disponemos de ese servicio. Por favor, elige nuevamente.");
+        alert("Opción inválida. Por favor, elige nuevamente.");
     }
 }
 
-
 /*Calculamos el precio que se gastrá el cliente entre numero
 de sesiones y precio por sesión*/
-let sesiones = prompt("En cuantas sesiones estas interesad@?")
+let sesiones = prompt("En cuantas sesiones estas interesad@?");
 function calcular(sesiones, precioSesion) {
     let costoTotal = sesiones * precioSesion;
     return costoTotal;
@@ -50,24 +91,11 @@ function calcular(sesiones, precioSesion) {
 let precioSesion = 35;
 let costoTotal = calcular(sesiones, precioSesion);
 
-alert("El costo total de tus" + " " + sesiones + " sesiones es de €" + costoTotal + ".");
-
-// Creamos una función de orden superior para mostrar los detalles del masaje
-function mostrarDetallesMasaje(masajeDeportivo) {
-    alert("Detalles del masaje: es una técnica terapéutica que combina movimientos profundos y estiramientos para mejorar el rendimiento y la recuperación de los atletas. Alivia la tensión muscular, promueve la circulación y previene lesiones, optimizando el cuerpo para un óptimo desempeño deportivo.");
-    alert("Nombre: " + masajeDeportivo.nombre);
-    alert("Duración: " + masajeDeportivo.duracion + " minutos");
-    alert("Terapeuta: " + masajeDeportivo.terapeuta);
-    alert("Precio: " + masajeDeportivo.precio);
-}
-
-// Creamos un objeto con información del masaje deportivo
-let masajeDeportivo = {
-    nombre: "Masaje deportivo",
-    duracion: "60 minutos",
-    terapeuta: "Blanca",
-    precio: "35€"
-};
-
-// Llamamos a la función para mostrar los detalles del masaje
-mostrarDetallesMasaje(masajeDeportivo);
+alert(
+    "El costo total de tus" +
+    " " +
+    sesiones +
+    " sesiones es de €" +
+    costoTotal +
+    "."
+);

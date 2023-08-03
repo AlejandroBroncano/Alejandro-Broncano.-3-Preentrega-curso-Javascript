@@ -1,3 +1,14 @@
+// Libreria SweetAlert2
+Swal.fire({
+    title: 'Bienvenido!',
+    text: 'Nuestro sitio está en construcción, en breves habremos terminado!',
+    icon: 'error',
+    iconColor: '#007BFF',
+    iconHtml: '<i class="fa-solid fa-person-digging"></i>',
+    confirmButtonText: 'Adelante!',
+    confirmButtonColor: '#dc3545',
+})
+
 // Datos de los tratamientos
 const masajes = [
     {

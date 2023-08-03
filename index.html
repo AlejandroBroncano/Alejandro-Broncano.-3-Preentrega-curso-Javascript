@@ -1,39 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nidra Centro de Masajes</title>
-    <link rel="stylesheet" href="./css/style.css" />
+    <title>NIDRA Centro de Masajes</title>
+    <link rel="stylesheet" href="./css/estilos.css">
 </head>
-<body>
-    <h1>Formulario de Masajes</h1>
-    <form id="formulario">
-        <div>
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" required />
-        </div>
-        <div>
-            <label for="edad">Edad:</label>
-            <input type="number" id="edad" required />
-        </div>
-        <div>
-            <label for="tratamiento">Tratamiento:</label>
-            <select id="tratamiento" required>
-                <option value="">Seleccione un tratamiento</option>
-                <option value="Deportivo">Deportivo</option>
-                <option value="Relajante">Relajante</option>
-                <option value="Maderoterapia">Maderoterapia</option>
-                <option value="Reflexología">Reflexología</option>
-                <option value="Shiatsu">Shiatsu</option>
-            </select>
-        </div>
-        <button type="submit">Enviar</button>
-    </form>
 
-    <div id="resultado"></div>
+<body>
+    <h1>Centro de Masajes</h1>
+    <form id="formulario">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" required>
+        <label for="tratamiento">Elige un tratamiento:</label>
+        <select id="tratamiento" required>
+            <option value="" disabled selected>Selecciona un tratamiento</option>
+        </select>
+        <button type="submit">Reservar</button>
+    </form>
+    <div id="carrito"></div>
+    <div id="montoTotal">Monto total: 0€</div>
+    <button id="borrarCarrito">Borrar Carrito</button>
 
     <script src="./js/main.js"></script>
 </body>
+
 </html>

@@ -171,15 +171,15 @@ function initMap() {
 
     // Estilo del mapa para que ocupe la esquina superior derecha y tenga un tamaño de 400x400 px
     const estiloMapa = {
-    position: 'absolute',
-    top: '75px', // Puedes ajustar la posición vertical según tu preferencia
-    right: '70px', // Puedes ajustar la posición horizontal según tu preferencia
-    width: '400px',
-    height: '400px',
-    border: '1px solid #ccc',
-    borderRadius: '5px',
-    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
-    zIndex: 1000 // Para asegurarnos de que el mapa esté sobre otros elementos
+        position: 'absolute',
+        top: '75px', // Puedes ajustar la posición vertical según tu preferencia
+        right: '70px', // Puedes ajustar la posición horizontal según tu preferencia
+        width: '400px',
+        height: '400px',
+        border: '1px solid #ccc',
+        borderRadius: '5px',
+        boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+        zIndex: 1000 // Para asegurarnos de que el mapa esté sobre otros elementos
     };
 
     // Crear el marcador en las coordenadas del centro de masajes
@@ -204,10 +204,39 @@ function initMap() {
     });
 
     // Agregar evento click al marcador para mostrar el infowindow
-    marcador.addListener('click', function() {
+    marcador.addListener('click', function () {
         infowindow.open(mapa, marcador);
     });
 
     // Aplicar el estilo al contenedor del mapa
     document.getElementById('mapa').setAttribute('style', Object.entries(estiloMapa).map(([prop, val]) => `${prop}:${val}`).join(';'));
 }
+
+// Función para obtener datos de usuarios desde la API
+function obtenerUsuarios() {
+    return fetch('https://randomuser.me/api/?results=5')
+        .then(response => response.json())
+        .then(data => {
+            const usuarios = data.results;
+
+            // Mostrar los datos de los usuarios en una ventana emergente
+            Swal.fire({
+                title: 'Usuarios Aleatorios',
+                html: usuarios.map(usuario => `
+            <p>Nombre: ${usuario.name.first} ${usuario.name.last}</p>
+            <p>Email: ${usuario.email}</p>
+            <hr>
+            `).join(''),
+                icon: 'info',
+                confirmButtonText: 'Cerrar'
+            });
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
+
+// Escuchar el evento click del botón "Obtener Usuarios"
+document.getElementById('obtenerUsuarios').addEventListener('click', () => {
+    obtenerUsuarios();
+});

@@ -154,3 +154,60 @@ document.addEventListener("DOMContentLoaded", function () {
         mostrarCarrito();
     }
 });
+
+// Variables globales
+let mapa;
+
+// Función para inicializar el mapa
+function initMap() {
+    const coordenadas = { lat: 36.71692, lng: -4.42206 }; // Reemplaza con las coordenadas del centro de masajes
+
+    mapa = new google.maps.Map(document.getElementById('mapa'), {
+        center: coordenadas,
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+        disableDefaultUI: true // Para desactivar los controles de zoom, etc.
+    });
+
+    // Estilo del mapa para que ocupe la esquina superior derecha y tenga un tamaño de 400x400 px
+    const estiloMapa = {
+    position: 'absolute',
+    top: '75px', // Puedes ajustar la posición vertical según tu preferencia
+    right: '70px', // Puedes ajustar la posición horizontal según tu preferencia
+    width: '400px',
+    height: '400px',
+    border: '1px solid #ccc',
+    borderRadius: '5px',
+    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.1)',
+    zIndex: 1000 // Para asegurarnos de que el mapa esté sobre otros elementos
+    };
+
+    // Crear el marcador en las coordenadas del centro de masajes
+    marcador = new google.maps.Marker({
+        position: coordenadas,
+        map: mapa,
+        title: 'Centro de Masajes'
+    });
+
+    // Contenido para el infowindow
+    const contenidoInfoWindow = `
+        <div>
+            <h3>Centro de Masajes</h3>
+            <p>Dirección: Calle Cordoba 6</p>
+            <p>Teléfono: 952298299</p>
+        </div>
+    `;
+
+    // Crear el infowindow
+    infowindow = new google.maps.InfoWindow({
+        content: contenidoInfoWindow
+    });
+
+    // Agregar evento click al marcador para mostrar el infowindow
+    marcador.addListener('click', function() {
+        infowindow.open(mapa, marcador);
+    });
+
+    // Aplicar el estilo al contenedor del mapa
+    document.getElementById('mapa').setAttribute('style', Object.entries(estiloMapa).map(([prop, val]) => `${prop}:${val}`).join(';'));
+}
